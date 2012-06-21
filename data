@@ -1,0 +1,85 @@
+#-------------------------------------------------
+#    Data file for the aorta in Navier-Stokes
+#-------------------------------------------------
+
+[problem]
+    viscosity    = 0.03      # viscosity g/(cm*s) (poise) 
+    analyticalSolution = false
+    
+[space_discretization]
+    mesh_dir         = /Users/tiziano/Documents/work/contracts_projects/aneurisk/mesh/100170/
+    mesh_type        = .vol
+    mesh_file        = 100170_full_ICA_cm_flext10_middle_label10.vol
+    grad_fespace = P1
+    nElements    = 20
+    xMin         = 0
+    xMax         = 1
+    yMin         = 0
+    yMax         = 1
+    zMin         = 0
+    zMax         = 1
+    
+[time_discretization]
+    initialtime      = 2.059
+    endtime          = 3.049
+    timestep         = 0.01 
+
+[prec]
+	prectype                = Ifpack # Ifpack or ML
+	displayList             = false
+
+        [./ifpack]
+	        overlap		= 1
+
+           	[./fact]
+           	ilut_level-of-fill            = 1
+           	level-of-fill                 = 1
+           	drop_tolerance                = 1.e-9
+           	relax_value                   = 0
+
+           	[../amesos]
+           	solvertype =  Amesos_KLU # Amesos_KLU or Amesos_Umfpack
+
+           	[../partitioner]
+           	overlap = 1
+
+           	[../schwarz]
+           	reordering_type = rcm #metis, rcm, none
+           	filter_singletons = true
+
+		    [../]
+	    [../]
+
+[aztec]
+    solver          = gmres
+    scaling         = none
+    output          = all # none
+    conv            = rhs
+    max_iter        = 200
+    reuse           = true
+    max_iter_reuse  = 80
+    kspace          = 100
+    tol             = 1.e-10    # AztecOO tolerance
+    
+[importer]
+    type                 = Ensight
+    post_dir             = ./importDir/
+    start                = 1
+    save                 = 1
+    multimesh            = false
+    time_id_width        = 3
+    exportMode           = 1
+    floatPrecision       = 1
+    numImportProc        = 1
+    prefix               = fluidReduced
+    varName              = importedVelocity
+
+[exporter]
+    type             = HDF5
+    post_dir         = ./
+    save             = 1
+    multimesh        = false
+    time_id_width    = 3
+    exportMode       = 2
+    floatPrecision   = 1
+

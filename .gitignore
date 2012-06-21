@@ -1,0 +1,17 @@
+testsuite.at
+Makefile.am
+Makefile.in
+*.scl
+*.case
+*.geo
+make.dep
+*.h5
+*.xmf
+*.txt
+*.o
+main
+*.out
+*.nodes
+.project
+.cproject
+computeViscousLengthScale

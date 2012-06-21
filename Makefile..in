@@ -1,0 +1,92 @@
+#
+# The paths to LifeV
+#
+LIFEPATH         = /Users/tiziano/Documents/work/workspace_indigo/cloud/lifev/lifev-cloud-opt-install
+LIFELIBPATH      = $(LIFEPATH)/lib
+LIFELIBS         = -llifevecm2 -llifevoperator -llifevnavierstokes -llifevcore
+LIFEINCLUDEPATH  = $(LIFEPATH)/include
+LIFELDFLAGS      = -L$(LIFELIBPATH)
+
+#
+# The paths to BLAS/LaPACK
+#
+#BLASPATH         = /usr
+#BLASLIBPATH      = $(BLASPATH)/lib
+#BLASLIBS         = -lblas -llapack
+BLASLIBS         = -framework Accelerate
+#BLASINCLUDEPATH  = $(BLASPATH)/include
+#BLASLDFLAGS      = -L$(BLASLIBPATH)
+
+#
+# The paths to UMFPACK
+#
+UMFPACKPATH        = /Users/tiziano/Documents/work/programmi/suitesparse/SuiteSparse-install
+UMFPACKLIBPATH     = $(UMFPACKPATH)/lib
+UMFPACKLIBS        = -lumfpack -lamd -lcholmod -lcamd -lcolamd -lccolamd
+UMFPACKINCLUDEPATH = $(UMFPACKPATH)/include
+UMFPACKLDFLAGS     = -L$(UMFPACKLIBPATH)
+
+
+#
+# The paths to Trilinos
+#
+TRILPATH         = /Users/tiziano/Documents/work/programmi/trilinos/trilinos-10.10.2-parallel-opt-install/
+TRILLIBPATH      = $(TRILPATH)/lib
+TRILLIBS         = -lml -ltriutils -lifpack -lbelos -lbelosepetra -laztecoo -lamesos \
+                   -lepetraext -lepetra -lteuchos -lzoltan
+TRILINCLUDEPATH  = $(TRILPATH)/include
+TRILLDFLAGS      = -L$(TRILLIBPATH)
+
+#
+# The paths to ParMETIS
+#
+PARMETISPATH        = /Users/tiziano/Documents/work/programmi/parmetis/ParMetis-3.1.1
+PARMETISLIBPATH     = $(PARMETISPATH)
+PARMETISLIBS        = -lparmetis -lmetis
+PARMETISINCLUDEPATH = $(PARMETISPATH)
+PARMETISLDFLAGS     = -L$(PARMETISLIBPATH)
+
+#
+# The paths to HDF5
+#
+HDF5PATH         = /Users/tiziano/Documents/work/programmi/hdf5/hdf5-1.8.6-v1.8-install
+HDF5LIBPATH      = $(HDF5PATH)/lib
+HDF5LIBS         = -lhdf5 -lz
+HDF5INCLUDEPATH  = $(HDF5PATH)/include
+HDF5LDFLAGS      = -L$(HDF5LIBPATH)
+
+#
+# The paths to MPI
+#
+MPIPATH        = /usr
+MPILIBPATH     = $(MPIPATH)/lib
+MPILIBS        = -lmpi -lmpi_cxx -lopen-rte -lopen-pal 
+MPIINCLUDEPATH = $(MPIPATH)/include
+MPILDFLAGS     = -L$(MPILIBPATH)
+
+#
+# The paths to Boost
+#
+BOOSTPATH        = /Users/tiziano/Documents/work/programmi/boost/boost_1_46_0-install
+BOOSTINCLUDEPATH = $(BOOSTPATH)/include
+
+#
+# The compiler used
+#
+CXX = mpicxx 
+#
+# Since the linker is by default set to CC
+# we make this workaround (we can do better)
+#
+CC  = $(CXX)
+#
+# I want always full warnings
+#
+WARNFLAGS= -W -Wall
+#
+# Additional optimization
+#
+OPTFLAGS += -O3
+# -g       generate code suitable for the debugger
+# -p       generate code suitable for the profiler
+# -O       attemp code optimizations
